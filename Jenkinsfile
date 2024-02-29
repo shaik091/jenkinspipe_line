@@ -1,9 +1,11 @@
 pipeline {
      agent any 
      stages {
-        stage('Testing') {
+        stage('Build Java Code') {
             steps {
-                echo 'wellcome to  jenkins pipeline'
+                echo "${BUILD_NUMBER}"
+                 sh  'bash build.sh'
+                 sh  'ls -al'
             }
         }
 
