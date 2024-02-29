@@ -1,4 +1,4 @@
-From tomcat: 8.0-alpine
+From tomcat: 17.0-alpine
 LABEL  maintainer='arshadshaik129@gmail.com'
 ADD ROOT*.war /usr/local/tomcat/webapp/
 EXPOSE 8080
