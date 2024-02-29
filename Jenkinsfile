@@ -36,6 +36,19 @@ pipeline {
 
             }
         }
+        stage('Perform Packer Build') {
+            steps {
+                sh 'packer build -var-file packer-vars.json packer.json  | tee output.text'
+                sh "tail -2 output.text | head -2 | awk 'match(\$0,/ami-.*/) {print substr(\$0, RSTART, RLENGTH)}' > ami.txt"
+                sh "echo \$(cat ami.txt) > ami.txt"
+                script {
+                    def AMIID = readFile('ami.txt').trim()
+                    sh "echo variable \\\"imagename\\\" { default = \\\"$AMIID\\\" }  >> variable.tf" 
+                } 
+
+
+            }
+        }
 
      }
 
