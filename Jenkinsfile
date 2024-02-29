@@ -29,7 +29,7 @@ pipeline {
            stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegisty( '', registryCredential) {
+                    docker.withRegistry( '', registryCredential) {
                         dockerImage.push()
                     }
                 }
